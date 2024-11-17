@@ -1,0 +1,68 @@
+<!-- public/index.html -->
+
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Mahasiswa</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+    <div class="container mx-auto p-4">
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-3xl font-bold text-center">Daftar Mahasiswa</h1>
+            <button id="logout-btn" class="bg-red-500 text-white px-4 py-2 rounded">Logout</button>
+        </div>
+
+        <!-- Form Tambah/Edit Mahasiswa (Hanya untuk dosen) -->
+        <div id="form-section" class="bg-white p-4 rounded shadow mb-6 hidden">
+            <h2 class="text-xl font-semibold mb-2" id="form-title">Tambah Mahasiswa</h2>
+            <form id="mahasiswa-form">
+                <input type="hidden" id="mahasiswa-id">
+                <div class="mb-4">
+                    <label class="block text-gray-700">Nama:</label>
+                    <input type="text" id="nama" class="w-full px-3 py-2 border rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">NIM:</label>
+                    <input type="text" id="nim" class="w-full px-3 py-2 border rounded" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Jurusan:</label>
+                    <input type="text" id="jurusan" class="w-full px-3 py-2 border rounded" required>
+                </div>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Simpan</button>
+                <button type="button" id="cancel-edit"
+                    class="bg-gray-500 text-white px-4 py-2 rounded ml-2 hidden">Batal</button>
+            </form>
+        </div>
+
+        <!-- Tabel Daftar Mahasiswa -->
+        <div class="bg-white p-4 rounded shadow">
+            <table class="min-w-full">
+                <thead>
+                    <tr>
+                        <th class="py-2 px-4 border-b">No</th>
+                        <th class="py-2 px-4 border-b">Nama</th>
+                        <th class="py-2 px-4 border-b">NIM</th>
+                        <th class="py-2 px-4 border-b">Jurusan</th>
+                        <th class="py-2 px-4 border-b">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="mahasiswa-table-body">
+                    <!-- Data Mahasiswa akan dimasukkan di sini -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="scripts.js"></script>
+</body>
+
+</html>

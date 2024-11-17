@@ -1,0 +1,68 @@
+<!-- public/login.html -->
+
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Daftar Mahasiswa</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+    <div class="bg-white p-6 rounded shadow-md w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-4 text-center">Login</h2>
+        <form id="login-form">
+            <div class="mb-4">
+                <label class="block text-gray-700">Username:</label>
+                <input type="text" id="username" class="w-full px-3 py-2 border rounded" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700">Password:</label>
+                <input type="password" id="password" class="w-full px-3 py-2 border rounded" required>
+            </div>
+            <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded">Login</button>
+        </form>
+        <p class="mt-4 text-center text-gray-600">Silakan login untuk mengakses aplikasi.</p>
+    </div>
+
+    <!-- Script -->
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    alert(data.error || 'Login gagal.');
+                    return;
+                }
+
+                // Simpan token dan role di localStorage
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('role', data.role);
+                localStorage.setItem('mahasiswaId', data.mahasiswaId || '');
+
+                // Redirect ke halaman utama
+                window.location.href = '/index.html';
+            } catch (error) {
+                alert('Terjadi kesalahan saat login.');
+            }
+        });
+    </script>
+</body>
+
+</html>
